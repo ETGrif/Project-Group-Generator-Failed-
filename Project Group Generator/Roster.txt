@@ -1,0 +1,16 @@
+Alex, 100.00
+Barbra, 99.00
+Charlie, 98.00
+Debbie, 97.00
+Eric, 96.00
+Frankie, 95.00
+George, 94.00
+Heather, 93.00
+Ian, 92.00
+Joan, 91.00
+Kyle, 90.00
+Lane, 89.00
+Mark, 88.00
+Natalie, 87.00
+Owen, 86.00
+Penny, 85.00
