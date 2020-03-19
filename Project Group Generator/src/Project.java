@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Project
 	{
@@ -43,12 +44,23 @@ public class Project
 			{
 
 				System.out.println("\"" + this.projectName + "\"\n");
+
 				for (Group g : this.groups)
 					{
+						System.out.print("\t");
 						System.out.println("\"" + g.getGroupName() + "\": " + g.getAverageGrade());
+
+						ArrayList<String> names = new ArrayList<String>();
+
 						for (Student s : g.getGroup())
 							{
-								System.out.println(s.getName());
+								names.add(s.getName());
+							}
+
+						Collections.sort(names);
+						for (String n : names)
+							{
+								System.out.println("\t" + n);
 							}
 						System.out.println();
 

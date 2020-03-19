@@ -1,9 +1,4 @@
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Scanner;
 
 public class SetUp
@@ -15,52 +10,52 @@ public class SetUp
 
 		public static void load()
 			{
+				// clear
+				Roster.roster.clear();
+				Runner.projects.clear();
+
 				// load files\
-				//load roster
+				// load roster
 				Roster.load();
-				
-				//load projects
+
+				// load projects
 				ArrayList<String> names = FileReadAndWrite.loadProjectNames();
 //				int loaded = 0;
 				for (String n : names)
 					{
-						
+
 						FileReadAndWrite.loadProjectFile(n.toString());
 //						loaded++;
 					}
 //				System.out.println("Loaded "+loaded+" files.");
-				
+
 				// TODO calculate encounters
-				for(Project p: Runner.projects) {
-					for(Group g: p.getGroups()) {
-						
-						//for each student in each group, add all other students 
-						for(Student s: g.getGroup()) {
-							s.addEncounters(g.getGroup());
-							System.out.println(s.getName() + " T");
-							
-							
-							
-							
-						}
-						
-						
-						
-						
+				for (Project p : Runner.projects)
+					{
+						for (Group g : p.getGroups())
+							{
+
+								// for each student in each group, add all other students
+								for (Student s : g.getGroup())
+									{
+										s.addEncounters(g.getGroup());
+//										System.out.println(s.getName() + " T");
+
+									}
+
+							}
 					}
-				}
 
 			}
 
 		public static void makeNewProject()
 			{
-				System.out.println("-=-=-=-=-=-");
 				System.out.println("Create new Project.");
 
 				String projectName = takeInput("Name of Project:");
 
 				System.out.println("Number of Groups:");
-				int groups = userInt.nextInt();
+				int groups = Runner.takeInt(9);
 
 				// TODO grab the number of students
 				int students = 16;
@@ -87,23 +82,29 @@ public class SetUp
 				while (roster.size() > 0)
 					{
 
-						// figure out which group
+						// figure out which group picks
 						String indexHelp = "ABCDEFGHIJ";
 						String groupLetter = abba.substring(0, 1);
+						abba = abba.substring(1);
 //						System.out.println("Test: "+groupLetter);
 						int index = indexHelp.indexOf(groupLetter);
 						Group g = project.getGroups().get(index);
-						abba = abba.substring(1);
 
 						// //find best pick based on group
 						Student pick = roster.get(0);
 						for (Student s : roster)
 							{
-								if ((countConflicts(g, s) <= countConflicts(g, pick))
-										&& (s.getGrade() > pick.getGrade()))
+								int sCon = countConflicts(g, s);
+								int pCon = countConflicts(g, pick);
+//								System.out.println(s + " and "+ pick + ":"+ countConflicts(g, s) + ":" + countConflicts(g, pick));
+								if ((sCon < pCon))
 									{
 //										System.out.println("Test");
 										pick = s;
+									} else if (sCon == pCon && (s.getGrade() > pick.getGrade()))
+									{
+										pick = s;
+
 									}
 
 							}
@@ -117,7 +118,7 @@ public class SetUp
 
 				// TODO sort each group
 
-				// update average grade
+				// update average grade and conflict count
 				for (Group g : project.getGroups())
 					{
 						g.updateAverageGrade();
@@ -130,12 +131,10 @@ public class SetUp
 
 				// "Post"
 				Runner.projects.add(project);
-				
+
 				// write file
 				FileReadAndWrite.writeProjectFile(project);
 				FileReadAndWrite.writeProjectNames();
-
-				
 
 			}
 
@@ -145,7 +144,7 @@ public class SetUp
 				boolean taking = true;
 				while (taking)
 					{
-						System.out.println("Name of Project:");
+						System.out.println("Name of Project:\n:");
 						response = userString.nextLine();
 						System.out.println("Confirm: \"" + response + "\" [Y/N]?");
 						String confirm = userString.nextLine();
@@ -167,7 +166,7 @@ public class SetUp
 								total++;
 							}
 					}
-				System.out.println(s.getName() + ":" + total);
+//				System.out.println(s.getName() + ":" + total);
 				return total;
 
 			}

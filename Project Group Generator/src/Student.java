@@ -45,4 +45,9 @@ public class Student
 				this.encountered.addAll(group);
 			}
 
+		public String toString()
+			{
+				return this.getName();
+			}
+
 	}

@@ -6,12 +6,14 @@ public class Group
 		protected String groupName;
 		protected ArrayList<Student> group;
 		protected double averageGrade;
+		protected int conflicts;
 
 		public Group(String groupName)
 			{
 				this.groupName = groupName;
 				this.group = new ArrayList<Student>();
 				this.averageGrade = 0.0;
+				this.conflicts = 0;
 			}
 
 		public String getGroupName()
