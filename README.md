@@ -1,4 +1,4 @@
-# Project-Group-Genorator
+# Project-Group-Generator
 This is just a little program made for my APCS teacher.
 Given a roster of students and their grades, the
 program generates any number of equally sized groups.
