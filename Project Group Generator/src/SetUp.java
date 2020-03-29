@@ -58,7 +58,7 @@ public class SetUp
 				int groups = Runner.takeInt(9);
 
 				// TODO grab the number of students
-				int students = 16;
+				int students = Roster.roster.size();
 
 				// generate ABBA
 				String abba = AbbaGen.genAbba(groups, students);
